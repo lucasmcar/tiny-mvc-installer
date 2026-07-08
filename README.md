@@ -23,8 +23,9 @@ To register the `tiny-mvc` command globally on your system, run the following co
 ```bash
 composer global require tiny-installer/tiny-mvc-installer
 
+```
 ---
-## Version
+## Versions
 1.0.0 - Initial commit
 1.0.1 - Fixed name in composer.json
 1.0.2 - Fixed require
