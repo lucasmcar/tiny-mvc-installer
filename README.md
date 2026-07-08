@@ -27,4 +27,5 @@ composer global require tiny-installer/tiny-mvc-installer
 ## Version
 1.0.0 - Initial commit
 1.0.1 - Fixed name in composer.json
-1.0.2 - Added License MIT 
+1.0.2 - Fixed require
+1.0.3 - Stable version
