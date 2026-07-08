@@ -1,5 +1,6 @@
 {
     "name": "tiny-installer/tiny-mvc-installer",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "TinyInstaller\\TinyMvcInstaller\\": "src/"
