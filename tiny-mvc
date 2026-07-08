@@ -24,7 +24,7 @@ $app->register('new')
         $output->writeln("<info>========================================</info>");
 
         // URL do esqueleto do seu framework no GitHub
-        $repository = "https://github.com/seu-usuario/tiny-mvc-skeleton.git";
+        $repository = "https://github.com/lucasmcar/php-tiny-skeleton.git";
 
         // Executa o Git Clone para baixar o esqueleto na pasta informada
         $output->writeln("<comment>-> Baixando a estrutura do framework...</comment>");
