@@ -1,0 +1,20 @@
+{
+    "name": "tiny-installer/tiny-mvc-installer",
+    "autoload": {
+        "psr-4": {
+            "TinyInstaller\\TinyMvcInstaller\\": "src/"
+        }
+    },
+    "bin": [
+        "tiny-mvc"
+    ],
+    "authors": [
+        {
+            "name": "lucasmcar",
+            "email": "lm.lucas90@gmail.comr"
+        }
+    ],
+    "require": {
+        "symfony/console": "^7.4"
+    }
+}

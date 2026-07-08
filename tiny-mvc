@@ -1,0 +1,58 @@
+#!/usr/bin/env php
+<?php
+
+// 1. Carrega as dependências do Composer
+require __DIR__ . '/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+$app = new Application('Tiny-MVC Installer', '1.0.0');
+
+// 2. Registra o comando "new"
+$app->register('new')
+    ->setDescription('Cria um novo projeto baseado no Tiny-MVC')
+    ->addArgument('name', InputArgument::REQUIRED, 'O nome da pasta do projeto')
+    ->setCode(function (InputInterface $input, OutputInterface $output) {
+        $projectName = $input->getArgument('name');
+        
+        $output->writeln("<info>========================================</info>");
+        $output->writeln("<info>  Criando novo projeto Tiny-MVC: {$projectName} </info>");
+        $output->writeln("<info>========================================</info>");
+
+        // URL do esqueleto do seu framework no GitHub
+        $repository = "https://github.com/seu-usuario/tiny-mvc-skeleton.git";
+
+        // Executa o Git Clone para baixar o esqueleto na pasta informada
+        $output->writeln("<comment>-> Baixando a estrutura do framework...</comment>");
+        exec("git clone $repository $projectName 2>&1", $cloneOutput, $cloneResult);
+
+        if ($cloneResult !== 0) {
+            $output->writeln("<error>Erro ao clonar o repositório. Verifique sua conexão ou se a URL está correta.</error>");
+            return Command::FAILURE;
+        }
+
+        // Limpa o histórico do Git do framework para o usuário começar o histórico dele do zero
+        if (is_dir("$projectName/.git")) {
+            // No Windows use 'rmdir /s /q', no Linux/Mac use 'rm -rf'
+            $command = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
+                ? "rmdir /s /q \"$projectName\\.git\"" 
+                : "rm -rf \"$projectName/.git\"";
+            exec($command);
+        }
+
+        $output->writeln("<comment>-> Instalando dependências do projeto (composer install)...</comment>");
+        // Entra na pasta do novo projeto e roda composer install
+        exec("cd $projectName && composer install 2>&1");
+
+        $output->writeln("\n<info>✨ Projeto criado com sucesso! ✨</info>");
+        $output->writeln("<comment>Para começar, execute:</comment>");
+        $output->writeln("cd {$projectName}");
+        
+        return Command::SUCCESS;
+    });
+
+$app->run();
