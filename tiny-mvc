@@ -1,8 +1,17 @@
 #!/usr/bin/env php
 <?php
 
-// 1. Carrega as dependências do Composer
-require __DIR__ . '/vendor/autoload.php';
+// 1. Carrega as dependências do Composer (descobre dinamicamente onde o vendor está)
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    // Se estiver rodando localmente no desenvolvimento
+    require __DIR__ . '/vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../../autoload.php')) {
+    // Se estiver rodando globalmente instalado pelo Composer
+    require __DIR__ . '/../../autoload.php';
+} else {
+    echo "Erro: Não foi possível encontrar o arquivo autoload.php do Composer." . PHP_EOL;
+    exit(1);
+}
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
