@@ -1,5 +1,6 @@
 {
     "name": "tiny-installer/tiny-mvc-installer",
+    "type": "project",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -12,7 +13,7 @@
     "authors": [
         {
             "name": "lucasmcar",
-            "email": "lm.lucas90@gmail.comr"
+            "email": "lmc.lucas90@gmail.com"
         }
     ],
     "require": {
